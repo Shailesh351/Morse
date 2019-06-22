@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Morse</string>
+    <string name="app_name">Morse Kit</string>
+
+    <string name="title_table">Morse Table</string>
+    <string name="title_translate">Translate</string>
+    <string name="title_settings">Settings</string>
 </resources>

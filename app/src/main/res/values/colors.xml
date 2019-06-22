@@ -5,4 +5,7 @@
     <color name="colorAccent">#2979FF</color>
 
     <color name="toolbarTitleColor">#000000</color>
+
+    <color name="colorNav">#999999</color>
+    <color name="colorNavSelected">#000000</color>
 </resources>
