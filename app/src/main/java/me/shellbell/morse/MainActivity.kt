@@ -1,6 +1,7 @@
 package me.shellbell.morse
 
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.ActionBar
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Run your application only in portrait mode
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         setUpPreferences()
         setUpActionBar()
