@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include layout="@layout/top_pref_buttons" />
+
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
@@ -23,6 +25,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         app:itemIconTint="@color/nav_item_color"
+        app:itemTextAppearanceActive="@style/TextAppearance.MaterialComponents.Subtitle2"
         app:itemTextColor="@color/nav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
