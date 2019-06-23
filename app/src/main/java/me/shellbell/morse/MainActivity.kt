@@ -5,8 +5,17 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_pref_buttons.*
+import me.shellbell.morse.controller.FlashController
+import me.shellbell.morse.controller.SoundController
+import me.shellbell.morse.controller.VibrationController
+import me.shellbell.morse.ui.CircleButton
+import me.shellbell.morselib.Morse
 
 class MainActivity : AppCompatActivity() {
+
+    private val flashController: FlashController by lazy { FlashController(this) }
+    private val soundController: SoundController by lazy { SoundController(this) }
+    private val vibrationController: VibrationController by lazy { VibrationController(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         setUpActionBar()
         setUpFABs()
         setUpBottomNavigation()
+
+        play.setOnClickListener {
+            val string = "sos"
+            textview.text = Morse.encode(string)
+            flashController.play(string)
+            soundController.play(string)
+            vibrationController.play(string)
+        }
     }
 
     private fun setUpBottomNavigation() {

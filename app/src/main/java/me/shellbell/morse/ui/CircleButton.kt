@@ -1,8 +1,9 @@
-package me.shellbell.morse
+package me.shellbell.morse.ui
 
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import me.shellbell.morse.R
 
 /**
  * Created by Shailesh351 on 23/6/19.

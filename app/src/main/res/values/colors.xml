@@ -9,7 +9,7 @@
     <color name="colorNav">#999999</color>
     <color name="colorNavSelected">#000000</color>
 
-    <color name="colorButtonRipple">#DDDDDD</color>
+    <color name="colorButtonRipple">#EEEEEE</color>
     <color name="colorButtonOn">@color/colorPrimary</color>
-    <color name="colorButtonOff">#DDDDDD</color>
+    <color name="colorButtonOff">#EEEEEE</color>
 </resources>
