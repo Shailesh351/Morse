@@ -1,6 +1,7 @@
 package me.shellbell.morse.controller
 
 import com.f2prateek.rx.preferences2.Preference
+import me.shellbell.morse.helper.Helper
 import me.shellbell.morselib.Constants
 import me.shellbell.morselib.Morse
 
@@ -41,6 +42,8 @@ abstract class BaseController(private val pref: Preference<Boolean>) : Runnable 
     override fun run() {
         val chars = getEncodedCharArray()
         var previous = ' '
+
+        Thread.sleep(Helper.NEW_PLAY_DELAY)
 
         for (char in chars) {
             if (!thread!!.isInterrupted) {

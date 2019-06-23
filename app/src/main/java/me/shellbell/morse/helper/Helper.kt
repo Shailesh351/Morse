@@ -12,5 +12,7 @@ class Helper {
         const val PREF_FLASH = "pref_flash"
         const val PREF_SOUND = "pref_sound"
         const val PREF_VIBRATION = "pref_vibration"
+
+        const val NEW_PLAY_DELAY = 500L
     }
 }
