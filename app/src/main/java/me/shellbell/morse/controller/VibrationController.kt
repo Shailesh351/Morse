@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import com.f2prateek.rx.preferences2.Preference
 import me.shellbell.morselib.Constants
 
 
@@ -11,7 +12,7 @@ import me.shellbell.morselib.Constants
  * Created by Shailesh351 on 23/6/19.
  */
 
-class VibrationController(private val context: Context) : MorseController() {
+class VibrationController(context: Context, pref: Preference<Boolean>) : BaseController(pref) {
 
     var vibrator: Vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 

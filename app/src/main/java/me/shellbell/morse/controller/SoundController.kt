@@ -3,6 +3,7 @@ package me.shellbell.morse.controller
 import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
+import com.f2prateek.rx.preferences2.Preference
 import me.shellbell.morselib.Constants
 
 
@@ -10,7 +11,7 @@ import me.shellbell.morselib.Constants
  * Created by Shailesh351 on 23/6/19.
  */
 
-class SoundController(val context: Context) : MorseController() {
+class SoundController(val context: Context, pref: Preference<Boolean>) : BaseController(pref) {
 
     companion object {
         private const val TAG: String = "SOUND_CONTROLLER"

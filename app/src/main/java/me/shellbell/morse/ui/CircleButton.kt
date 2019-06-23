@@ -2,6 +2,7 @@ package me.shellbell.morse.ui
 
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import com.f2prateek.rx.preferences2.Preference
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import me.shellbell.morse.R
 
@@ -10,9 +11,10 @@ import me.shellbell.morse.R
  */
 
 class CircleButton(
-    val fab: FloatingActionButton,
+    private val fab: FloatingActionButton,
     @DrawableRes val iconOn: Int,
-    @DrawableRes val iconOff: Int
+    @DrawableRes val iconOff: Int,
+    private val pref: Preference<Boolean>
 ) {
     var curState = CircleButtonState.ON
 
@@ -23,6 +25,11 @@ class CircleButton(
     var colorBackgroundOff: Int = R.color.colorButtonOff
 
     init {
+        when (pref.get()) {
+            true -> setState(CircleButtonState.ON)
+            false -> setState(CircleButtonState.OFF)
+        }
+
         fab.setOnClickListener {
             toggleState()
         }
@@ -46,11 +53,13 @@ class CircleButton(
                 //changeElevation(onElevation)
                 changeBackground(colorBackgroundOn)
                 changeIcon(iconOn)
+                pref.set(true)
             }
             CircleButtonState.OFF -> {
                 //changeElevation(offElevation)
                 changeBackground(colorBackgroundOff)
                 changeIcon(iconOff)
+                pref.set(false)
             }
         }
     }

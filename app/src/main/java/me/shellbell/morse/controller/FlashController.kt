@@ -8,13 +8,14 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import com.f2prateek.rx.preferences2.Preference
 import me.shellbell.morselib.Constants
 
 /**
  * Created by Shailesh351 on 23/6/19.
  */
 
-class FlashController(private val context: Context) : MorseController() {
+class FlashController(private val context: Context, pref: Preference<Boolean>) : BaseController(pref) {
 
     companion object {
         private const val TAG: String = "FLASH_CONTROLLER"
