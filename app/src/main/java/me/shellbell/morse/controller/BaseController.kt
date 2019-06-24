@@ -9,7 +9,7 @@ import me.shellbell.morselib.Morse
  * Created by Shailesh351 on 23/6/19.
  */
 
-abstract class BaseController(private val pref: Preference<Boolean>) : Runnable {
+abstract class BaseController(pref: Preference<Boolean>) : Runnable {
 
     private var thread: Thread? = null
     private var stringToEncode = ""
