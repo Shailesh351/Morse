@@ -25,7 +25,7 @@ import me.shellbell.morse.ui.CircleButton
  * Created by Shailesh351 on 22/6/19.
  */
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Player {
 
     private lateinit var flashPref: Preference<Boolean>
     private lateinit var soundPref: Preference<Boolean>
@@ -54,14 +54,18 @@ class MainActivity : AppCompatActivity() {
         setUpFragments()
         setUpFABs()
         setUpBottomNavigation()
+    }
 
-        /*play.setOnClickListener {
-            val string = "sos"
-            textview.text = Morse.encode(string)
-            flashController.play(string)
-            soundController.play(string)
-            vibrationController.play(string)
-        }*/
+    override fun play(string: String) {
+        flashController.play(string)
+        soundController.play(string)
+        vibrationController.play(string)
+    }
+
+    override fun play(char: Char) {
+        flashController.play(char.toString())
+        soundController.play(char.toString())
+        vibrationController.play(char.toString())
     }
 
     private fun setUpPreferences() {

@@ -8,6 +8,7 @@ class MorseMapper {
 
     private val charToMorseMap: HashMap<Char, String> = HashMap()
     private val morseToCharMap: HashMap<String, Char> = HashMap()
+    private val morseList: ArrayList<MorseCode> = arrayListOf()
 
     init {
         createMap()
@@ -19,6 +20,10 @@ class MorseMapper {
 
     fun getMorseToCharMap(): HashMap<String, Char> {
         return morseToCharMap
+    }
+
+    fun getMorseCodeList(): ArrayList<MorseCode> {
+        return morseList
     }
 
     private fun createMap() {
@@ -61,6 +66,13 @@ class MorseMapper {
 
         for ((key, value) in charToMorseMap) {
             morseToCharMap[value] = key
+            morseList.add(MorseCode(key, value))
         }
+
+        val list: ArrayList<MorseCode> = arrayListOf()
+        morseList.filter { it.char.isLetter() }.sortedBy { it.char }.toCollection(list)
+        morseList.filter { it.char.isDigit() }.sortedBy { it.char }.toCollection(list)
+        morseList.clear()
+        morseList.addAll(list)
     }
 }
