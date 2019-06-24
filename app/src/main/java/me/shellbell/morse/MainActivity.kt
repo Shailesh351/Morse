@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.f2prateek.rx.preferences2.Preference
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,8 +16,14 @@ import me.shellbell.morse.controller.FlashController
 import me.shellbell.morse.controller.SoundController
 import me.shellbell.morse.controller.VibrationController
 import me.shellbell.morse.helper.Helper
+import me.shellbell.morse.morsetable.MorseTableFragment
+import me.shellbell.morse.settings.SettingsFragment
+import me.shellbell.morse.translate.TranslateFragment
 import me.shellbell.morse.ui.CircleButton
-import me.shellbell.morselib.Morse
+
+/**
+ * Created by Shailesh351 on 22/6/19.
+ */
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +35,13 @@ class MainActivity : AppCompatActivity() {
     private val soundController: SoundController by lazy { SoundController(this, soundPref) }
     private val vibrationController: VibrationController by lazy { VibrationController(this, vibrationPref) }
 
+    private val morseTableFragment: MorseTableFragment by lazy { MorseTableFragment() }
+    private val translateFragment: TranslateFragment by lazy { TranslateFragment() }
+    private val settingsFragment: SettingsFragment by lazy { SettingsFragment() }
+
+    private val fm: FragmentManager by lazy { supportFragmentManager }
+    private var active: Fragment = morseTableFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,46 +51,58 @@ class MainActivity : AppCompatActivity() {
 
         setUpPreferences()
         setUpActionBar()
+        setUpFragments()
         setUpFABs()
         setUpBottomNavigation()
 
-        play.setOnClickListener {
+        /*play.setOnClickListener {
             val string = "sos"
             textview.text = Morse.encode(string)
             flashController.play(string)
             soundController.play(string)
             vibrationController.play(string)
-        }
+        }*/
     }
 
     private fun setUpPreferences() {
-        var preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        var rxPreferences = RxSharedPreferences.create(preferences)
+        val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val rxPreferences = RxSharedPreferences.create(preferences)
 
         flashPref = rxPreferences.getBoolean(Helper.PREF_FLASH, true)
         soundPref = rxPreferences.getBoolean(Helper.PREF_SOUND, true)
         vibrationPref = rxPreferences.getBoolean(Helper.PREF_VIBRATION, true)
     }
 
+    private fun setUpFragments() {
+        fm.beginTransaction().add(R.id.fragment_container, settingsFragment, SettingsFragment.TAG)
+            .hide(settingsFragment).commit()
+        fm.beginTransaction().add(R.id.fragment_container, translateFragment, TranslateFragment.TAG)
+            .hide(translateFragment).commit()
+        fm.beginTransaction().add(R.id.fragment_container, morseTableFragment, MorseTableFragment.TAG).commit()
+    }
+
     private fun setUpBottomNavigation() {
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_table -> {
-                    textview.text = "Morse Table"
+                    fm.beginTransaction().hide(active).show(morseTableFragment).commit()
+                    active = morseTableFragment
                 }
                 R.id.navigation_translate -> {
-                    textview.text = "Translate"
+                    fm.beginTransaction().hide(active).show(translateFragment).commit()
+                    active = translateFragment
                 }
                 R.id.navigation_settings -> {
-                    textview.text = "Settings"
+                    fm.beginTransaction().hide(active).show(settingsFragment).commit()
+                    active = settingsFragment
                 }
                 else -> {
-                    textview.text = "Morse Code"
+                    //Other item
                 }
             }
             return@setOnNavigationItemSelectedListener true
         }
-        navigation.selectedItemId = R.id.navigation_translate
+        navigation.selectedItemId = R.id.navigation_table
     }
 
     private fun setUpFABs() {
