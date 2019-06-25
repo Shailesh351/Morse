@@ -1,16 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:theme="@style/Theme.MaterialComponents.Light"
     tools:context=".translate.TranslateFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textSize="24sp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Translate Fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mode_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/edit_text_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mode_text_view">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:hint="@string/text_input_text_message"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/black"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@style/translate_hint_style"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/text_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+                        android:gravity="top|start"
+                        android:inputType="textNoSuggestions|textMultiLine"
+                        android:maxLines="4"
+                        android:scrollbars="vertical"
+                        android:text="SOS"
+                        android:textSize="22sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/morse_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:hint="@string/text_input_morse_code"
+                    app:boxStrokeColor="@color/black"
+                    app:hintEnabled="true"
+                    app:hintTextAppearance="@style/translate_hint_style"
+                    app:hintTextColor="@color/black">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/morse_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:digits=".- "
+                        android:inputType="textNoSuggestions|textMultiLine"
+                        android:maxLines="2"
+                        android:scrollbars="vertical"
+                        android:text="...---..."
+                        android:textSize="22sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fab_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_container">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_change_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:src="@drawable/ic_exchange"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:elevation="3dp"
+                    app:fabSize="mini"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/colorButtonRipple"
+                    app:useCompatPadding="true" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_copy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_copy"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:elevation="3dp"
+                    app:fabSize="mini"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/fab_play"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/colorButtonRipple"
+                    app:useCompatPadding="true" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_play_arrow"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:elevation="3dp"
+                    app:fabSize="mini"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/colorButtonRipple"
+                    app:useCompatPadding="true" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</ScrollView>

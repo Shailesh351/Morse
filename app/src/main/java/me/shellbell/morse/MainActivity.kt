@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), Player {
     private val settingsFragment: SettingsFragment by lazy { SettingsFragment() }
 
     private val fm: FragmentManager by lazy { supportFragmentManager }
-    private var active: Fragment = morseTableFragment
+    private var active: Fragment = translateFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +80,9 @@ class MainActivity : AppCompatActivity(), Player {
     private fun setUpFragments() {
         fm.beginTransaction().add(R.id.fragment_container, settingsFragment, SettingsFragment.TAG)
             .hide(settingsFragment).commit()
-        fm.beginTransaction().add(R.id.fragment_container, translateFragment, TranslateFragment.TAG)
-            .hide(translateFragment).commit()
-        fm.beginTransaction().add(R.id.fragment_container, morseTableFragment, MorseTableFragment.TAG).commit()
+        fm.beginTransaction().add(R.id.fragment_container, morseTableFragment, MorseTableFragment.TAG)
+            .hide(morseTableFragment).commit()
+        fm.beginTransaction().add(R.id.fragment_container, translateFragment, TranslateFragment.TAG).commit()
     }
 
     private fun setUpBottomNavigation() {
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity(), Player {
             }
             return@setOnNavigationItemSelectedListener true
         }
-        navigation.selectedItemId = R.id.navigation_table
+        navigation.selectedItemId = R.id.navigation_translate
     }
 
     private fun setUpFABs() {

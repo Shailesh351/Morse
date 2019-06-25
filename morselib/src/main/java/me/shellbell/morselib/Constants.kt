@@ -11,7 +11,7 @@ class Constants {
 
         val DASH = '-'
 
-        val INVALID = "INVALID"
+        val INVALID = "null"
 
         //One Space
         val MORSE_CHARACTER_SEPARATOR = ' '

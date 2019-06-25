@@ -19,6 +19,7 @@
         android:lineSpacingExtra="0dp"
         android:text="B"
         android:textAllCaps="true"
+        android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -33,6 +34,7 @@
         android:lineSpacingExtra="0dp"
         android:text="-----"
         android:textAllCaps="true"
-        android:textSize="20sp" />
+        android:textColor="@color/black"
+        android:textSize="22sp" />
 
 </LinearLayout>

@@ -10,7 +10,6 @@
         android:id="@+id/fab_flash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="false"
         android:src="@drawable/ic_flash_on"
         app:backgroundTint="@color/colorPrimary"
         app:rippleColor="@color/colorButtonRipple"
