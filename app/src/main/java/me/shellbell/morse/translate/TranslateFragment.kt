@@ -4,8 +4,11 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
+import android.speech.tts.TextToSpeech.OnInitListener
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_translate.*
 import me.shellbell.morse.Player
 import me.shellbell.morse.R
 import me.shellbell.morselib.Morse
+import java.util.*
 
 
 /**
@@ -28,6 +32,7 @@ class TranslateFragment : Fragment() {
     }
 
     private lateinit var player: Player
+    private lateinit var textToSpeech: TextToSpeech
 
     private val TEXT_TO_MORSE = 0
     private val MORSE_TO_TEXT = 1
@@ -100,13 +105,50 @@ class TranslateFragment : Fragment() {
 
         setUpListeners()
         setTranslateMode(TEXT_TO_MORSE)
+        setUpTextToSpeech()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        textToSpeech.stop()
+        textToSpeech.shutdown()
+    }
+
+    private fun setUpTextToSpeech() {
+        textToSpeech = TextToSpeech(context, OnInitListener { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val ttsLang = textToSpeech.setLanguage(Locale.US)
+
+                if (ttsLang == TextToSpeech.LANG_MISSING_DATA || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Log.e("TTS", "The Language is not supported!")
+                } else {
+                    Log.i("TTS", "Language Supported.")
+                }
+                Log.i("TTS", "Initialization success.")
+            } else {
+                Toast.makeText(context, "TTS Initialization failed!", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun setUpListeners() {
         fab_play.setOnClickListener {
-            val text = text_edit_text.text.toString().trim()
-            if (text.isNotBlank())
-                player.play(text)
+
+            when (mode) {
+                TEXT_TO_MORSE -> {
+                    val text = text_edit_text.text.toString().trim()
+                    if (text.isNotBlank())
+                        player.play(text)
+                }
+                MORSE_TO_TEXT -> {
+                    //Text to Speech
+                    val text = text_edit_text.text.toString().trim()
+                    if (player.isPlaying())
+                        player.stop()
+                    if (text.isNotBlank())
+                        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "TEXT")
+                }
+            }
         }
 
         fab_change_mode.setOnClickListener {

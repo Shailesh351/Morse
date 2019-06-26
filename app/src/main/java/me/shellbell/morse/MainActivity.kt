@@ -12,9 +12,6 @@ import com.f2prateek.rx.preferences2.Preference
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_pref_buttons.*
-import me.shellbell.morse.controller.FlashController
-import me.shellbell.morse.controller.SoundController
-import me.shellbell.morse.controller.VibrationController
 import me.shellbell.morse.helper.Helper
 import me.shellbell.morse.morsetable.MorseTableFragment
 import me.shellbell.morse.settings.SettingsFragment
@@ -31,9 +28,7 @@ class MainActivity : AppCompatActivity(), Player {
     private lateinit var soundPref: Preference<Boolean>
     private lateinit var vibrationPref: Preference<Boolean>
 
-    private val flashController: FlashController by lazy { FlashController(this, flashPref) }
-    private val soundController: SoundController by lazy { SoundController(this, soundPref) }
-    private val vibrationController: VibrationController by lazy { VibrationController(this, vibrationPref) }
+    private val morsePlayer: MorsePlayer by lazy { MorsePlayer(this, flashPref, soundPref, vibrationPref) }
 
     private val morseTableFragment: MorseTableFragment by lazy { MorseTableFragment() }
     private val translateFragment: TranslateFragment by lazy { TranslateFragment() }
@@ -57,15 +52,19 @@ class MainActivity : AppCompatActivity(), Player {
     }
 
     override fun play(string: String) {
-        flashController.play(string)
-        soundController.play(string)
-        vibrationController.play(string)
+        morsePlayer.play(string)
     }
 
     override fun play(char: Char) {
-        flashController.play(char.toString())
-        soundController.play(char.toString())
-        vibrationController.play(char.toString())
+        morsePlayer.play(char)
+    }
+
+    override fun isPlaying(): Boolean {
+        return morsePlayer.isPlaying()
+    }
+
+    override fun stop() {
+        morsePlayer.stop()
     }
 
     private fun setUpPreferences() {

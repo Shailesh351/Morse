@@ -9,4 +9,8 @@ interface Player {
     fun play(string: String)
 
     fun play(char: Char)
+
+    fun isPlaying(): Boolean
+
+    fun stop()
 }

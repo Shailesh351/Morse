@@ -33,9 +33,16 @@ abstract class BaseController(pref: Preference<Boolean>) : Runnable {
         thread!!.start()
     }
 
-    private fun stop() {
+    fun isPlaying(): Boolean {
+        if (thread == null || thread!!.isInterrupted)
+            return false
+        return true
+    }
+
+    fun stop() {
         thread?.let {
-            thread!!.interrupt()
+            if (!thread!!.isInterrupted)
+                thread!!.interrupt()
         }
     }
 

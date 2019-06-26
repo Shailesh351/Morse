@@ -101,7 +101,7 @@
                         android:inputType="textNoSuggestions|textMultiLine"
                         android:maxLines="2"
                         android:scrollbars="vertical"
-                        android:text="...---..."
+                        android:text="... --- ..."
                         android:textSize="22sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
