@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(), Player {
     private fun setUpKeyBoard() {
         KeyboardVisibilityEvent.setEventListener(this) { isOpen ->
             if (isOpen) {
-                navigation.visibility = View.INVISIBLE
+                navigation.visibility = View.GONE
             } else {
                 navigation.visibility = View.VISIBLE
             }

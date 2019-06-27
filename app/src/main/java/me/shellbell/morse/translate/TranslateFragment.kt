@@ -193,6 +193,9 @@ class TranslateFragment : Fragment() {
                 text_edit_text.isEnabled = true
                 morse_edit_text.isEnabled = false
 
+                text_edit_text.maxLines = 3
+                morse_edit_text.maxLines = Int.MAX_VALUE
+
                 text_edit_text.requestFocus()
                 text_edit_text.setSelection(text_edit_text.text!!.length)
             }
@@ -206,6 +209,9 @@ class TranslateFragment : Fragment() {
 
                 morse_edit_text.isEnabled = true
                 text_edit_text.isEnabled = false
+
+                morse_edit_text.maxLines = 3
+                text_edit_text.maxLines = Int.MAX_VALUE
 
                 morse_edit_text.requestFocus()
                 morse_edit_text.setSelection(morse_edit_text.text!!.length)
