@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,6 +18,8 @@ import me.shellbell.morse.morsetable.MorseTableFragment
 import me.shellbell.morse.settings.SettingsFragment
 import me.shellbell.morse.translate.TranslateFragment
 import me.shellbell.morse.ui.CircleButton
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
+
 
 /**
  * Created by Shailesh351 on 22/6/19.
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity(), Player {
         setUpFragments()
         setUpFABs()
         setUpBottomNavigation()
+        setUpKeyBoard()
     }
 
     override fun play(string: String) {
@@ -118,5 +122,15 @@ class MainActivity : AppCompatActivity(), Player {
     private fun setUpActionBar() {
         supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
         supportActionBar?.setCustomView(R.layout.appbar)
+    }
+
+    private fun setUpKeyBoard() {
+        KeyboardVisibilityEvent.setEventListener(this) { isOpen ->
+            if (isOpen) {
+                navigation.visibility = View.INVISIBLE
+            } else {
+                navigation.visibility = View.VISIBLE
+            }
+        }
     }
 }

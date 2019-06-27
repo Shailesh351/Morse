@@ -3,6 +3,7 @@ package me.shellbell.morse.translate
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
@@ -12,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_translate.*
@@ -137,6 +139,9 @@ class TranslateFragment : Fragment() {
             when (mode) {
                 TEXT_TO_MORSE -> {
                     val text = text_edit_text.text.toString().trim()
+                    if(textToSpeech.isSpeaking){
+                        textToSpeech.stop()
+                    }
                     if (text.isNotBlank())
                         player.play(text)
                 }
@@ -187,6 +192,9 @@ class TranslateFragment : Fragment() {
 
                 text_edit_text.isEnabled = true
                 morse_edit_text.isEnabled = false
+
+                text_edit_text.requestFocus()
+                text_edit_text.setSelection(text_edit_text.text!!.length)
             }
             MORSE_TO_TEXT -> {
                 mode_text_view.text = "MORSE TO TEXT"
@@ -198,8 +206,15 @@ class TranslateFragment : Fragment() {
 
                 morse_edit_text.isEnabled = true
                 text_edit_text.isEnabled = false
+
+                morse_edit_text.requestFocus()
+                morse_edit_text.setSelection(morse_edit_text.text!!.length)
             }
         }
+
+        val imm = context!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+
         invalidateEditTextListeners()
     }
 
