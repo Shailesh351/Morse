@@ -5,7 +5,6 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import com.f2prateek.rx.preferences2.Preference
-import me.shellbell.morselib.Constants
 
 
 /**
@@ -19,22 +18,22 @@ class VibrationController(context: Context, pref: Preference<Boolean>) : BaseCon
     override fun generateDot() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val effect =
-                VibrationEffect.createOneShot(Constants.DOT_TIME_INTERVAL.toLong(), VibrationEffect.DEFAULT_AMPLITUDE)
+                VibrationEffect.createOneShot(morseTime.DOT_TIME_INTERVAL.toLong(), VibrationEffect.DEFAULT_AMPLITUDE)
             vibrator.vibrate(effect)
         } else {
-            vibrator.vibrate(Constants.DOT_TIME_INTERVAL.toLong())
+            vibrator.vibrate(morseTime.DOT_TIME_INTERVAL.toLong())
         }
-        Thread.sleep(Constants.DOT_TIME_INTERVAL.toLong())
+        Thread.sleep(morseTime.DOT_TIME_INTERVAL.toLong())
     }
 
     override fun generateDash() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val effect =
-                VibrationEffect.createOneShot(Constants.DASH_TIME_INTERVAL.toLong(), VibrationEffect.DEFAULT_AMPLITUDE)
+                VibrationEffect.createOneShot(morseTime.DASH_TIME_INTERVAL.toLong(), VibrationEffect.DEFAULT_AMPLITUDE)
             vibrator.vibrate(effect)
         } else {
-            vibrator.vibrate(Constants.DASH_TIME_INTERVAL.toLong())
+            vibrator.vibrate(morseTime.DASH_TIME_INTERVAL.toLong())
         }
-        Thread.sleep(Constants.DASH_TIME_INTERVAL.toLong())
+        Thread.sleep(morseTime.DASH_TIME_INTERVAL.toLong())
     }
 }

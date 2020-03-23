@@ -4,7 +4,6 @@ import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
 import com.f2prateek.rx.preferences2.Preference
-import me.shellbell.morselib.Constants
 
 
 /**
@@ -26,12 +25,12 @@ class SoundController(val context: Context, pref: Preference<Boolean>) : BaseCon
     private val toneGenerator = ToneGenerator(STREAM_TYPE, VOLUME)
 
     override fun generateDot() {
-        toneGenerator.startTone(TONE_TYPE_DOT, Constants.DOT_TIME_INTERVAL)
-        Thread.sleep(Constants.DOT_TIME_INTERVAL.toLong())
+        toneGenerator.startTone(TONE_TYPE_DOT, morseTime.DOT_TIME_INTERVAL)
+        Thread.sleep(morseTime.DOT_TIME_INTERVAL.toLong())
     }
 
     override fun generateDash() {
-        toneGenerator.startTone(TONE_TYOE_DASH, Constants.DASH_TIME_INTERVAL)
-        Thread.sleep(Constants.DASH_TIME_INTERVAL.toLong())
+        toneGenerator.startTone(TONE_TYOE_DASH, morseTime.DASH_TIME_INTERVAL)
+        Thread.sleep(morseTime.DASH_TIME_INTERVAL.toLong())
     }
 }

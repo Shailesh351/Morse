@@ -1,7 +1,11 @@
 package me.shellbell.morse.controller
 
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.f2prateek.rx.preferences2.Preference
+import com.f2prateek.rx.preferences2.RxSharedPreferences
 import me.shellbell.morse.helper.Helper
+import me.shellbell.morselib.MorseTime
 import me.shellbell.morselib.Constants
 import me.shellbell.morselib.Morse
 
@@ -10,6 +14,8 @@ import me.shellbell.morselib.Morse
  */
 
 abstract class BaseController(pref: Preference<Boolean>) : Runnable {
+
+    var morseTime = MorseTime(250)
 
     private var thread: Thread? = null
     private var stringToEncode = ""
@@ -60,36 +66,36 @@ abstract class BaseController(pref: Preference<Boolean>) : Runnable {
                             if (isOn) {
                                 generateDot()
                             } else {
-                                Thread.sleep(Constants.DOT_TIME_INTERVAL.toLong())
+                                Thread.sleep(morseTime.DOT_TIME_INTERVAL.toLong())
                             }
-                            Thread.sleep(Constants.CHAR_PAUSE_TIME_INTERVAL.toLong())
+                            Thread.sleep(morseTime.CHAR_PAUSE_TIME_INTERVAL.toLong())
                         }
                         Constants.DASH -> {
                             if (isOn) {
                                 generateDash()
                             } else {
-                                Thread.sleep(Constants.DASH_TIME_INTERVAL.toLong())
+                                Thread.sleep(morseTime.DASH_TIME_INTERVAL.toLong())
                             }
-                            Thread.sleep(Constants.CHAR_PAUSE_TIME_INTERVAL.toLong())
+                            Thread.sleep(morseTime.CHAR_PAUSE_TIME_INTERVAL.toLong())
                         }
                         Constants.MORSE_CHARACTER_SEPARATOR -> {
                             if (previous == Constants.DOT || previous == Constants.DASH) {
                                 Thread.sleep(
-                                    Constants.CHARACTER_SEPERATOR_TIME_INTERVAL.toLong() -
-                                            Constants.CHAR_PAUSE_TIME_INTERVAL.toLong()
+                                    morseTime.CHARACTER_SEPERATOR_TIME_INTERVAL.toLong() -
+                                            morseTime.CHAR_PAUSE_TIME_INTERVAL.toLong()
                                 )
                             } else {
-                                Thread.sleep(Constants.CHARACTER_SEPERATOR_TIME_INTERVAL.toLong())
+                                Thread.sleep(morseTime.CHARACTER_SEPERATOR_TIME_INTERVAL.toLong())
                             }
                         }
                         Constants.WORD_SEPERATOR_PLACEHOLDER -> {
                             if (previous == Constants.DOT || previous == Constants.DASH) {
                                 Thread.sleep(
-                                    Constants.WORD_SEPERATOR_TIME_INTERVAL.toLong() -
-                                            Constants.CHAR_PAUSE_TIME_INTERVAL.toLong()
+                                    morseTime.WORD_SEPERATOR_TIME_INTERVAL.toLong() -
+                                            morseTime.CHAR_PAUSE_TIME_INTERVAL.toLong()
                                 )
                             } else {
-                                Thread.sleep(Constants.CHARACTER_SEPERATOR_TIME_INTERVAL.toLong())
+                                Thread.sleep(morseTime.CHARACTER_SEPERATOR_TIME_INTERVAL.toLong())
                             }
                         }
                     }

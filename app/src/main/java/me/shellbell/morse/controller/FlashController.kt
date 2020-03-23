@@ -9,7 +9,6 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import com.f2prateek.rx.preferences2.Preference
-import me.shellbell.morselib.Constants
 
 /**
  * Created by Shailesh351 on 23/6/19.
@@ -51,13 +50,13 @@ class FlashController(private val context: Context, pref: Preference<Boolean>) :
 
     override fun generateDot() {
         flashOn()
-        Thread.sleep(Constants.DOT_TIME_INTERVAL.toLong())
+        Thread.sleep(morseTime.DOT_TIME_INTERVAL.toLong())
         flashOff()
     }
 
     override fun generateDash() {
         flashOn()
-        Thread.sleep(Constants.DASH_TIME_INTERVAL.toLong())
+        Thread.sleep(morseTime.DASH_TIME_INTERVAL.toLong())
         flashOff()
     }
 

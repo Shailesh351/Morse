@@ -13,6 +13,8 @@ class Helper {
         const val PREF_SOUND = "pref_sound"
         const val PREF_VIBRATION = "pref_vibration"
 
+        const val PREF_SPEED = "pref_speed"
+
         const val NEW_PLAY_DELAY = 600L
     }
 }
