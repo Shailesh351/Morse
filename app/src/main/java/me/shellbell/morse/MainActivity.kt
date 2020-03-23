@@ -3,12 +3,12 @@ package me.shellbell.morse
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.preference.PreferenceManager
 import com.f2prateek.rx.preferences2.Preference
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,14 +31,21 @@ class MainActivity : AppCompatActivity(), Player {
     private lateinit var soundPref: Preference<Boolean>
     private lateinit var vibrationPref: Preference<Boolean>
 
-    private val morsePlayer: MorsePlayer by lazy { MorsePlayer(this, flashPref, soundPref, vibrationPref) }
+    private val morsePlayer: MorsePlayer by lazy {
+        MorsePlayer(
+            this,
+            flashPref,
+            soundPref,
+            vibrationPref
+        )
+    }
 
     private val morseTableFragment: MorseTableFragment by lazy { MorseTableFragment() }
     private val translateFragment: TranslateFragment by lazy { TranslateFragment() }
     private val settingsFragment: SettingsFragment by lazy { SettingsFragment() }
 
     private val fm: FragmentManager by lazy { supportFragmentManager }
-    private var active: Fragment = translateFragment
+    private var active: Fragment = morseTableFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +79,8 @@ class MainActivity : AppCompatActivity(), Player {
     }
 
     private fun setUpPreferences() {
-        val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val preferences: SharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val rxPreferences = RxSharedPreferences.create(preferences)
 
         flashPref = rxPreferences.getBoolean(Helper.PREF_FLASH, true)
@@ -83,9 +91,13 @@ class MainActivity : AppCompatActivity(), Player {
     private fun setUpFragments() {
         fm.beginTransaction().add(R.id.fragment_container, settingsFragment, SettingsFragment.TAG)
             .hide(settingsFragment).commit()
-        fm.beginTransaction().add(R.id.fragment_container, morseTableFragment, MorseTableFragment.TAG)
-            .hide(morseTableFragment).commit()
-        fm.beginTransaction().add(R.id.fragment_container, translateFragment, TranslateFragment.TAG).commit()
+//        fm.beginTransaction().add(R.id.fragment_container, morseTableFragment, MorseTableFragment.TAG)
+//            .hide(morseTableFragment).commit()
+        fm.beginTransaction().add(R.id.fragment_container, translateFragment, TranslateFragment.TAG)
+            .hide(translateFragment).commit()
+        //Default
+        fm.beginTransaction()
+            .add(R.id.fragment_container, morseTableFragment, MorseTableFragment.TAG).commit()
     }
 
     private fun setUpBottomNavigation() {
@@ -109,14 +121,21 @@ class MainActivity : AppCompatActivity(), Player {
             }
             return@setOnNavigationItemSelectedListener true
         }
-        navigation.selectedItemId = R.id.navigation_translate
+        navigation.selectedItemId = R.id.navigation_table
     }
 
     private fun setUpFABs() {
-        val buttonFlash = CircleButton(fab_flash, R.drawable.ic_flash_on, R.drawable.ic_flash_off, flashPref)
-        val buttonSound = CircleButton(fab_sound, R.drawable.ic_sound_on, R.drawable.ic_sound_off, soundPref)
+        val buttonFlash =
+            CircleButton(fab_flash, R.drawable.ic_flash_on, R.drawable.ic_flash_off, flashPref)
+        val buttonSound =
+            CircleButton(fab_sound, R.drawable.ic_sound_on, R.drawable.ic_sound_off, soundPref)
         val buttonVibrate =
-            CircleButton(fab_vibrate, R.drawable.ic_vibration_on, R.drawable.ic_vibration_off, vibrationPref)
+            CircleButton(
+                fab_vibrate,
+                R.drawable.ic_vibration_on,
+                R.drawable.ic_vibration_off,
+                vibrationPref
+            )
     }
 
     private fun setUpActionBar() {

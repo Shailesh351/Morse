@@ -139,7 +139,7 @@ class TranslateFragment : Fragment() {
             when (mode) {
                 TEXT_TO_MORSE -> {
                     val text = text_edit_text.text.toString().trim()
-                    if(textToSpeech.isSpeaking){
+                    if (textToSpeech.isSpeaking) {
                         textToSpeech.stop()
                     }
                     if (text.isNotBlank())
@@ -159,9 +159,14 @@ class TranslateFragment : Fragment() {
         fab_change_mode.setOnClickListener {
             when (mode) {
                 TEXT_TO_MORSE -> {
+                    if (player.isPlaying())
+                        player.stop()
                     setTranslateMode(MORSE_TO_TEXT)
                 }
                 MORSE_TO_TEXT -> {
+                    if (textToSpeech.isSpeaking) {
+                        textToSpeech.stop()
+                    }
                     setTranslateMode(TEXT_TO_MORSE)
                 }
             }

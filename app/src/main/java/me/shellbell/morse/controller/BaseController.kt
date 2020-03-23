@@ -1,13 +1,11 @@
 package me.shellbell.morse.controller
 
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import com.f2prateek.rx.preferences2.Preference
-import com.f2prateek.rx.preferences2.RxSharedPreferences
 import me.shellbell.morse.helper.Helper
-import me.shellbell.morselib.MorseTime
 import me.shellbell.morselib.Constants
 import me.shellbell.morselib.Morse
+import me.shellbell.morselib.MorseTime
+import java.lang.Exception
 
 /**
  * Created by Shailesh351 on 23/6/19.
@@ -56,7 +54,11 @@ abstract class BaseController(pref: Preference<Boolean>) : Runnable {
         val chars = getEncodedCharArray()
         var previous = ' '
 
-        Thread.sleep(Helper.NEW_PLAY_DELAY)
+        try {
+            Thread.sleep(Helper.NEW_PLAY_DELAY)
+        } catch (InterruptedException: Exception) {
+            //Interrupted exception
+        }
 
         for (char in chars) {
             if (!thread!!.isInterrupted) {
@@ -112,7 +114,10 @@ abstract class BaseController(pref: Preference<Boolean>) : Runnable {
 
     private fun getEncodedCharArray(): CharArray {
         var morse = Morse.encode(stringToEncode)
-        morse = morse.replace(Constants.MORSE_WORD_SEPARATOR, Constants.WORD_SEPERATOR_PLACEHOLDER.toString())
+        morse = morse.replace(
+            Constants.MORSE_WORD_SEPARATOR,
+            Constants.WORD_SEPERATOR_PLACEHOLDER.toString()
+        )
         return morse.toCharArray()
     }
 
