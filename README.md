@@ -1,3 +1,5 @@
+<img alt="Morse Kit" src="https://github.com/Shailesh351/Morse/raw/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png">
+
 # Morse Kit
 
 - [x] Play Morse Code using Flash, Sound and Vibration simultaneously. You can turn on/off any while playing. Implemented using Threads. 
