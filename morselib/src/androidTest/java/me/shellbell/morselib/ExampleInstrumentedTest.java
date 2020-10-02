@@ -1,4 +1,4 @@
-package me.shellbell.morselib;
+package dev.shellbell.morselib;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("me.shellbell.morselib.test", appContext.getPackageName());
+        assertEquals("dev.shellbell.morselib.test", appContext.getPackageName());
     }
 }

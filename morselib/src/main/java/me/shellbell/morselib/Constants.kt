@@ -1,4 +1,4 @@
-package me.shellbell.morselib
+package dev.shellbell.morselib
 
 /**
  * Created by Shailesh351 on 22/6/19.

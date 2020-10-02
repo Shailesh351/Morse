@@ -1,10 +1,10 @@
-package me.shellbell.morse.morsetable
+package dev.shellbell.morse.morsetable
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import me.shellbell.morse.R
-import me.shellbell.morselib.MorseCode
+import dev.shellbell.morse.R
+import dev.shellbell.morselib.MorseCode
 
 /**
  * Created by Shailesh351 on 24/6/19.

@@ -1,4 +1,4 @@
-package me.shellbell.morse.controller
+package dev.shellbell.morse.controller
 
 import android.content.Context
 import android.os.Build

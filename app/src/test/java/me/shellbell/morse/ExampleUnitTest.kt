@@ -1,4 +1,4 @@
-package me.shellbell.morse
+package dev.shellbell.morse
 
 import org.junit.Test
 

@@ -1,10 +1,10 @@
-package me.shellbell.morse
+package dev.shellbell.morse
 
 import android.content.Context
 import com.f2prateek.rx.preferences2.Preference
-import me.shellbell.morse.controller.FlashController
-import me.shellbell.morse.controller.SoundController
-import me.shellbell.morse.controller.VibrationController
+import dev.shellbell.morse.controller.FlashController
+import dev.shellbell.morse.controller.SoundController
+import dev.shellbell.morse.controller.VibrationController
 
 /**
  * Created by Shailesh351 on 26/6/19.

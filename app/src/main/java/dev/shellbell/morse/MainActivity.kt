@@ -1,4 +1,4 @@
-package me.shellbell.morse
+package dev.shellbell.morse
 
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
@@ -13,11 +13,11 @@ import com.f2prateek.rx.preferences2.Preference
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.top_pref_buttons.*
-import me.shellbell.morse.helper.Helper
-import me.shellbell.morse.morsetable.MorseTableFragment
-import me.shellbell.morse.settings.SettingsFragment
-import me.shellbell.morse.translate.TranslateFragment
-import me.shellbell.morse.ui.CircleButton
+import dev.shellbell.morse.helper.Helper
+import dev.shellbell.morse.morsetable.MorseTableFragment
+import dev.shellbell.morse.settings.SettingsFragment
+import dev.shellbell.morse.translate.TranslateFragment
+import dev.shellbell.morse.ui.CircleButton
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 
@@ -111,10 +111,10 @@ class MainActivity : AppCompatActivity(), Player {
                     fm.beginTransaction().hide(active).show(translateFragment).commit()
                     active = translateFragment
                 }
-                R.id.navigation_settings -> {
-                    fm.beginTransaction().hide(active).show(settingsFragment).commit()
-                    active = settingsFragment
-                }
+//                R.id.navigation_settings -> {
+//                    fm.beginTransaction().hide(active).show(settingsFragment).commit()
+//                    active = settingsFragment
+//                }
                 else -> {
                     //Other item
                 }

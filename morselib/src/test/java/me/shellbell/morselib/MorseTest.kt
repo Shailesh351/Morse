@@ -1,4 +1,4 @@
-package me.shellbell.morselib
+package dev.shellbell.morselib
 
 import org.junit.Assert
 import org.junit.Test

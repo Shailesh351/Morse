@@ -1,10 +1,10 @@
-package me.shellbell.morse.ui
+package dev.shellbell.morse.ui
 
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.f2prateek.rx.preferences2.Preference
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import me.shellbell.morse.R
+import dev.shellbell.morse.R
 
 /**
  * Created by Shailesh351 on 23/6/19.

@@ -1,4 +1,4 @@
-package me.shellbell.morse.translate
+package dev.shellbell.morse.translate
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -17,9 +17,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_translate.*
-import me.shellbell.morse.Player
-import me.shellbell.morse.R
-import me.shellbell.morselib.Morse
+import dev.shellbell.morse.Player
+import dev.shellbell.morse.R
+import dev.shellbell.morselib.Morse
 import java.util.*
 
 

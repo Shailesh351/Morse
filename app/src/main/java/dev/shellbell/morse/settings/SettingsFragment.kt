@@ -1,4 +1,4 @@
-package me.shellbell.morse.settings
+package dev.shellbell.morse.settings
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -12,8 +12,8 @@ import androidx.preference.PreferenceManager
 import com.f2prateek.rx.preferences2.Preference
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import kotlinx.android.synthetic.main.fragment_settings.*
-import me.shellbell.morse.R
-import me.shellbell.morse.helper.Helper
+import dev.shellbell.morse.R
+import dev.shellbell.morse.helper.Helper
 
 /**
  * Created by Shailesh351 on 24/6/19.

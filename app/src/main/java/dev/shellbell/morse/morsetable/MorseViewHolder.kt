@@ -1,4 +1,4 @@
-package me.shellbell.morse.morsetable
+package dev.shellbell.morse.morsetable
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView

@@ -1,4 +1,4 @@
-package me.shellbell.morse.morsetable
+package dev.shellbell.morse.morsetable
 
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_morse_table.*
-import me.shellbell.morse.Player
-import me.shellbell.morse.R
-import me.shellbell.morselib.MorseCode
-import me.shellbell.morselib.MorseMapper
+import dev.shellbell.morse.Player
+import dev.shellbell.morse.R
+import dev.shellbell.morselib.MorseCode
+import dev.shellbell.morselib.MorseMapper
 
 /**
  * Created by Shailesh351 on 24/6/19.

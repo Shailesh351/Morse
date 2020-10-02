@@ -1,10 +1,10 @@
-package me.shellbell.morse.controller
+package dev.shellbell.morse.controller
 
 import com.f2prateek.rx.preferences2.Preference
-import me.shellbell.morse.helper.Helper
-import me.shellbell.morselib.Constants
-import me.shellbell.morselib.Morse
-import me.shellbell.morselib.MorseTime
+import dev.shellbell.morse.helper.Helper
+import dev.shellbell.morselib.Constants
+import dev.shellbell.morselib.Morse
+import dev.shellbell.morselib.MorseTime
 import java.lang.Exception
 
 /**
