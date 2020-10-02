@@ -8,9 +8,7 @@
 
 ## Download
 
-<a href="https://play.google.com/store/apps/details?id=dev.shellbell.morse">
-  <img alt="Download on Google Play" src="https://play.google.com/intl/en_us/badges/images/badge_new.png" height=43>
-</a>
+[<img src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge-border.png" width="200" alt="Get Morse Kit on Google Play" />](https://play.google.com/store/apps/details?id=dev.shellbell.morse "Get Morse Kit on Google Play")
 
 ## Screenshots
 
