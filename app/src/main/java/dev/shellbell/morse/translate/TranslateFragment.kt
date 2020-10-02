@@ -3,7 +3,6 @@ package dev.shellbell.morse.translate
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.TextToSpeech.OnInitListener
@@ -13,7 +12,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_translate.*
@@ -133,6 +131,11 @@ class TranslateFragment : Fragment() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        setTranslateMode(mode)
+    }
+
     private fun setUpListeners() {
         fab_play.setOnClickListener {
 
@@ -201,8 +204,10 @@ class TranslateFragment : Fragment() {
                 text_edit_text.maxLines = 3
                 morse_edit_text.maxLines = Int.MAX_VALUE
 
-                text_edit_text.requestFocus()
-                text_edit_text.setSelection(text_edit_text.text!!.length)
+                if (isAdded && isVisible) {
+                    text_edit_text.requestFocus()
+                    text_edit_text.setSelection(text_edit_text.text!!.length)
+                }
             }
             MORSE_TO_TEXT -> {
                 mode_text_view.text = "MORSE TO TEXT"
@@ -218,13 +223,12 @@ class TranslateFragment : Fragment() {
                 morse_edit_text.maxLines = 3
                 text_edit_text.maxLines = Int.MAX_VALUE
 
-                morse_edit_text.requestFocus()
-                morse_edit_text.setSelection(morse_edit_text.text!!.length)
+                if (isAdded && isVisible) {
+                    morse_edit_text.requestFocus()
+                    morse_edit_text.setSelection(morse_edit_text.text!!.length)
+                }
             }
         }
-
-        val imm = context!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-        imm!!.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         invalidateEditTextListeners()
     }
@@ -243,7 +247,7 @@ class TranslateFragment : Fragment() {
     }
 
     private fun copyToClipboard(text: CharSequence) {
-        val clipboard = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
         Toast.makeText(context, "Copied to clipboard", Toast.LENGTH_SHORT).show()

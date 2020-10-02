@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.hardware.Camera
 import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Build
 import android.util.Log
@@ -22,6 +23,8 @@ class FlashController(private val context: Context, pref: Preference<Boolean>) :
 
     private var camManager: CameraManager? = null
     private var cameraId: String? = null
+    private var isFlashSupported: Boolean = false
+
 
     private var mCamera: Camera? = null
     private var parameters: Camera.Parameters? = null
@@ -30,6 +33,9 @@ class FlashController(private val context: Context, pref: Preference<Boolean>) :
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             camManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
             cameraId = camManager?.cameraIdList?.get(0)
+            val cameraCharacteristics: CameraCharacteristics =
+                cameraId?.let { camManager?.getCameraCharacteristics(it) } as CameraCharacteristics
+            isFlashSupported = cameraCharacteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) ?: false
         } else {
             mCamera = Camera.open()
             mCamera?.let {
@@ -67,7 +73,7 @@ class FlashController(private val context: Context, pref: Preference<Boolean>) :
     private fun flashOn() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             try {
-                if (camManager != null && cameraId != null) {
+                if (camManager != null && cameraId != null && isFlashSupported) {
                     camManager!!.setTorchMode(cameraId!!, true)
                 }
             } catch (e: CameraAccessException) {
@@ -83,7 +89,7 @@ class FlashController(private val context: Context, pref: Preference<Boolean>) :
     private fun flashOff() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             try {
-                if (camManager != null && cameraId != null) {
+                if (camManager != null && cameraId != null && isFlashSupported) {
                     camManager!!.setTorchMode(cameraId!!, false)
                 }
             } catch (e: CameraAccessException) {
